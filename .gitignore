@@ -1,1 +1,7 @@
 .env
+# Databases
+*.csv
+*.jsonl
+
+# Python Cache
+__pycache__/
