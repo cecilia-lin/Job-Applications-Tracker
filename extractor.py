@@ -9,6 +9,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class JobApplication(BaseModel):
+    is_valid_job: bool = Field(
+        description="True ONLY if the text is clearly a job description or posting. False if it is random text, an article, or garbage."
+    )
     company: str = Field(description="Name of the hiring company. If not found, use 'Unknown'.")
     job_title: str = Field(description="Title of the role. If not found, use 'Unknown'.")
     skills: list[str] = Field(default_factory=list, description="List of required technical and soft skills.")
@@ -44,8 +47,19 @@ def extract_job_details(description_text: str) -> JobApplication | None:
                 'temperature': 0.1, 
             },
         )
-        # 3. Validate and return
-        return JobApplication.model_validate_json(response.text)
+        job_data = JobApplication.model_validate_json(response.text)
+        
+
+        # 3. Check if the extracted job is valid
+        if not job_data.is_valid_job:
+                    print("\n[Extraction Rejected] The provided text does not appear to be a valid job posting.")
+                    return None
+                
+        job_data.date_applied = datetime.date.today().isoformat()
+        job_data.status = "Applied"
+        
+        # 4. Validate and return
+        return job_data
         
     except errors.APIError as e:
         print(f"\n[Extraction Failed] API Error: {e}")
