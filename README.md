@@ -17,7 +17,7 @@ A robust command-line tool designed to streamline job hunting for data analysts 
    ```
 4. Install dependencies:
    ```bash
-   uv pip install -r requirements.txt
+   uv sync
    ```
 
 ## Usage
@@ -26,12 +26,12 @@ A robust command-line tool designed to streamline job hunting for data analysts 
 
 **From a text file:**
 ```bash
-python main.py add --file path/to/job_description.txt
+python src/main.py add --file path/to/job_description.txt
 ```
 
 **Paste text directly:**
 ```bash
-python main.py add --text "Software Engineer at TechCorp Inc. Location: San Francisco, CA. Salary: $120k-$150k. Requirements: Python, React, PostgreSQL..."
+python src/main.py add --text "Software Engineer at TechCorp Inc. Location: San Francisco, CA. Salary: $120k-$150k. Requirements: Python, React, PostgreSQL..."
 ```
 
 The tool will:
@@ -44,7 +44,7 @@ The tool will:
 
 Track your progress as you interview:
 ```bash
-python main.py update "Company Name" --title "Job Title" --status "Interviewing"
+python src/main.py update "Company Name" --title "Job Title" --status "Interviewing"
 ```
 
 Valid statuses: `Applied`, `Interviewing`, `Offer`, `Rejected`, etc.
@@ -53,7 +53,7 @@ Valid statuses: `Applied`, `Interviewing`, `Offer`, `Rejected`, etc.
 
 See your application metrics and top in-demand skills:
 ```bash
-python main.py dashboard
+python src/main.py dashboard
 ```
 
 This displays:
