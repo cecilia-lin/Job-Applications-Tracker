@@ -15,4 +15,4 @@ dependencies = [
 ]
 
 [project.scripts]
-jobtrack = "job-applications-tracker.main:main"
+jobtrack = "main:main"
