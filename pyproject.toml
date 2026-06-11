@@ -16,3 +16,9 @@ dependencies = [
 
 [project.scripts]
 jobtrack = "main:main"
+
+[tool.setuptools]
+py-modules = ["extractor", "main", "storage"]
+
+[tool.setuptools.package-dir]
+"" = "src"

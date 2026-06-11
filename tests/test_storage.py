@@ -1,3 +1,7 @@
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
 from extractor import JobApplication
 from storage import save_application, update_status, view_dashboard
 
