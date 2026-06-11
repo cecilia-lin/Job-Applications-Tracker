@@ -28,12 +28,8 @@ def run_tests():
     save_application(job2, raw_text_2, "test_db.csv", "test_raw.jsonl")
 
     print("\n[TEST 2] Updating Status...")
-    update_status("Meta", "Interview Scheduled", "test_db.csv")
-
-    
-    print("\n[TEST 2] Updating Status...")
-    update_status("Meta", "Interview Scheduled", "test_db.csv")
-    update_status("Visa", "Interview Scheduled", "test_db.csv")
+    update_status("Meta", "Data Analyst", "Interview Scheduled", "test_db.csv")
+    update_status("Visa", "Technical Business Analyst", "Interview Scheduled", "test_db.csv")
 
     print("\n[TEST 3] Viewing Dashboard...")
     view_dashboard("test_db.csv")

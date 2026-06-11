@@ -39,10 +39,10 @@ def save_application(job: JobApplication, raw_text: str, csv_filename: str = CSV
         f.write(json.dumps(raw_record) + "\n")
     print(f"Saved raw description to {raw_filename}")
 
-def update_status(company_name: str, new_status: str, filename: str = CSV_FILE) -> bool:
-    """Finds an application by company name and updates its status in the CSV."""
+def update_status(company_name: str, job_title: str, new_status: str, filename: str = CSV_FILE) -> bool:
+    """Finds an application by company and title, then updates its status in the CSV."""
     if not os.path.isfile(filename):
-        print("No applications file found.")
+        print(" No applications file found.")
         return False
 
     updated = False
@@ -51,7 +51,10 @@ def update_status(company_name: str, new_status: str, filename: str = CSV_FILE) 
     with open(filename, mode='r', newline='', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            if row['company'].lower() == company_name.lower():
+            # Check that BOTH the company and the job title match (case-insensitive)
+            if (row['company'].lower() == company_name.lower() and 
+                row['job_title'].lower() == job_title.lower()):
+                
                 row['status'] = new_status
                 updated = True
             rows.append(row)
@@ -61,10 +64,10 @@ def update_status(company_name: str, new_status: str, filename: str = CSV_FILE) 
             writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
             writer.writeheader()
             writer.writerows(rows)
-        print(f"Updated status for {company_name} to '{new_status}'")
+        print(f"Updated status for '{job_title}' at {company_name} to '{new_status}'")
         return True
     else:
-        print(f"Could not find an application for '{company_name}'.")
+        print(f"Could not find a '{job_title}' application for {company_name}.")
         return False
 
 def view_dashboard(filename: str = CSV_FILE):
